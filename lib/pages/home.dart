@@ -64,21 +64,20 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Column(
-        children: <Widget>[
-          FutureBuilder<Data>(
-            future: returnData,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return clientList(snapshot.data!.clients);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              return const CircularProgressIndicator();
-            },
-          )
-        ],
-      ),
+      body: Container(
+          child: FutureBuilder<Data>(
+        future: returnData,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return clientList(snapshot.data!.clients);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      )),
     );
   }
 }
